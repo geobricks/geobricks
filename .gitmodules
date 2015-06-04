@@ -64,9 +64,6 @@
 [submodule "server/geobricks_trmm"]
 	path = server/geobricks_trmm
 	url = https://github.com/geobricks/geobricks_trmm.git
-[submodule "server/geoserver-css2sld"]
-	path = server/geoserver-css2sld
-	url = https://github.com/geobricks/geoserver-css2sld.git
 [submodule "server/geobricks_storage_manager"]
 	path = server/geobricks_storage_manager
 	url = https://github.com/geobricks/geobricks_storage_manager.git

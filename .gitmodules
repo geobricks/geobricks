@@ -73,3 +73,6 @@
 [submodule "server/geobricks_scheduler"]
 	path = server/geobricks_scheduler
 	url = https://github.com/geobricks/geobricks_scheduler.git
+[submodule "server/geobricks_mod16"]
+	path = server/geobricks_mod16
+	url = https://github.com/geobricks/geobricks_mod16.git

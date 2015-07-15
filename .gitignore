@@ -1,2 +1,4 @@
 .idea
 /out/
+/requirements.txt~
+*.travis.yml~

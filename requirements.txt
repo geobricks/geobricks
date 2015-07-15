@@ -2,3 +2,4 @@ watchdog
 flask
 flask-cors
 requests
+geopy

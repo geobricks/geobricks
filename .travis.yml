@@ -6,4 +6,4 @@ install:
   - "pip install pytest pytest-cov"
   - "pip install -e server/geobricks_common"   # install package using setup.py in editable mode
 script:
-   - py.test server/geobricks_commonn --cov server/geobricks_common/geobricks_common --cov-report term-missing
+   - py.test server/geobricks_common/geobricks_common --cov server/geobricks_common/geobricks_common --cov-report term-missing

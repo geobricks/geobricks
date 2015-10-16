@@ -5,21 +5,17 @@ import subprocess
 
 BASE_FOLDER_PREFIX = 'geobricks_'
 
-@click.command()
-@click.option('--cmd', help='Switch between link and unlink georbciks libraries')
+
+@click.group()
+def cli_symlink():
+    pass
+
+@cli_symlink.command()
 @click.option('--python_lib_path', help='Python Lib Path. This should be ideally a virtualenv python')
-def cli_create_dev_enviroment(cmd, python_lib_path):
+def symlink(python_lib_path):
+    """Create Geobricks symlink to python lib path"""
 
     python_lib_path = os.path.join(python_lib_path, 'site-packages')
-
-    if cmd == 'symlink':
-        create_symlinks(python_lib_path)
-
-    elif cmd == 'unlink':
-        remove_symlinks(python_lib_path)
-
-
-def create_symlinks(python_lib_path):
 
     geobricks_folders = get_geobricks_folders()
 
@@ -34,7 +30,16 @@ def create_symlinks(python_lib_path):
             print e
 
 
-def remove_symlinks(python_lib_path):
+@click.group()
+def cli_unlink():
+    pass
+
+@cli_unlink.command()
+@click.option('--python_lib_path', help='Python Lib Path. This should be ideally a virtualenv python')
+def unlink(python_lib_path):
+    """Create Geobricks unlink in python lib path"""
+
+    python_lib_path = os.path.join(python_lib_path, 'site-packages')
 
     geobricks_folders = get_geobricks_folders()
 
@@ -49,7 +54,6 @@ def remove_symlinks(python_lib_path):
         except Exception, e:
             print "WARNING: " + str(geobricks_folder)
             print e
-
 
 def symlink_geobricks_folder(geobricks_folder, python_lib_path):
     subprocess.call(["ln", "-s", geobricks_folder, python_lib_path])
@@ -73,5 +77,59 @@ def get_geobricks_folders():
     return folders
 
 
+cli = click.CommandCollection(sources=[cli_symlink, cli_unlink])
+
 if __name__ == '__main__':
-    cli_create_dev_enviroment()
+    cli()
+
+
+# @click.command()
+# @click.option('--cmd', help='Switch between link and unlink georbciks libraries')
+# @click.option('--python_lib_path', help='Python Lib Path. This should be ideally a virtualenv python')
+# def cli_create_dev_env(cmd, python_lib_path):
+#
+#     python_lib_path = os.path.join(python_lib_path, 'site-packages')
+#
+#     if cmd == 'symlink':
+#         create_symlinks(python_lib_path)
+#
+#     elif cmd == 'unlink':
+#         remove_symlinks(python_lib_path)
+#
+#
+# def create_symlinks(python_lib_path):
+#
+#     geobricks_folders = get_geobricks_folders()
+#
+#     for geobricks_folder in geobricks_folders:
+#         try:
+#
+#             print geobricks_folder
+#             symlink_geobricks_folder(geobricks_folder, python_lib_path)
+#
+#         except Exception, e:
+#             print "WARNING: " + str(geobricks_folder)
+#             print e
+#
+#
+# def remove_symlinks(python_lib_path):
+#
+#     geobricks_folders = get_geobricks_folders()
+#
+#     for geobricks_folder in geobricks_folders:
+#         try:
+#
+#             folder_name = os.path.basename(geobricks_folder)
+#             folder = os.path.join(python_lib_path, folder_name)
+#             print folder
+#             unlink_geobricks_folder(folder)
+#
+#         except Exception, e:
+#             print "WARNING: " + str(geobricks_folder)
+#             print e
+#
+#
+#
+#
+# if __name__ == '__main__':
+#     cli_create_dev_env()

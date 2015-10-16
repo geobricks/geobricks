@@ -2,3 +2,6 @@
 /out/
 /requirements.txt~
 *.travis.yml~
+*.iml
+*.pyc
+*.txt~
